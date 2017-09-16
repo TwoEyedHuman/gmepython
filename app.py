@@ -16,7 +16,7 @@ def webhook():
 	data = request.get_json()
 	log('Recieved {}'.format(data))
 
-	if 'roll' in data['text'] and 'die' in data['text']:
+	if 'roll' in data['text'].lower() and 'die' in data['text'].lower():
 		roll_dice(data)
 
 	return "ok", 200
