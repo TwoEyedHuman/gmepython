@@ -38,4 +38,4 @@ def log(msg):
 def roll_dice(data):
 	numbers = [int(s) for s in data['text'].split() if s.isdigit()]
 	result_dice = randint(1,numbers[0])
-	send_message("Your die landed on " + result_dice)
+	send_message("Your die landed on " + str(result_dice))
