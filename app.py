@@ -9,7 +9,7 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
-@app.route(int(os.environ.get("PORT", 5000)), methods=['POST'])
+@app.route('/', methods=['POST'])
 def webhook():
 	data = request.get_json()
 	log('Recieved {}'.format(data))
