@@ -64,7 +64,7 @@ def whosOnline(data):
 		responsePayload = responseBody.json['state']
 		if responsePayload == "Online":
 			responseSystem = responseBody.json['devices'][0]['type']
-			if responseBody.json['devices'][0]['titles'][0]['placement'] == 'Full']:
+			if responseBody.json['devices'][0]['titles'][0]['placement'] == 'Full':
 				responseGame = responseBody.json['devices'][0]['titles'][0]['name']
 			else:
 				responseGame = responseBody.json['devices'][0]['titles'][1]['name']
