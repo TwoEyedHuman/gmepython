@@ -21,7 +21,7 @@ def webhook():
 
 	if 'roll' in data['text'].lower() and 'die' in data['text'].lower():
 		roll_dice(data)
-	elif 'whos online' in data['text']:
+	elif 'whos online' in data['text'].lower() or 'who\'s online' in data['text'].lower():
 		whosOnline(data)
 
 	return "ok", 200
