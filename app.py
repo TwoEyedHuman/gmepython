@@ -47,12 +47,19 @@ def roll_dice(data):
 
 def getUserPresence(gt):
 	xboxURL = 'https://xboxapi.com/v2/'
-	headers = {'X-Auth': os.getenv('XBOX_API_ID')}
-	result = requests.get(xboxURL + gt + '/presence', headers=headers)
+
+	headers = {
+    	'X-AUTH': os.getenv('XBOX_API_ID'),
+	}
+	
+	result = requests.get('https://xboxapi.com/v2/Unsung%20Samurai/presence', headers=headers)
+
+#	headers = {'X-Auth': os.getenv('XBOX_API_ID')}
+#	result = requests.get(xboxURL + gt + '/presence', headers=headers)
 	##result = request.POST.get(xboxURL + gt + '/presence', headers=headers)
 
 ##	res = self.request("https://xboxapi.com/v2/" + gt + "/presence".format(xuid))
-	return result()
+	return result
 
 def whosOnline(data):
 	retStr = ""
