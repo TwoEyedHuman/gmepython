@@ -54,7 +54,7 @@ def getUserPresence(gt):
 	
 	responseBody = requests.get('https://xboxapi.com/v2/Unsung Samurai/presence', headers=headers, verify=False)
 
-	responsePL = responseBody.json()
+	responsePL = responseBody.json[]
 
 #	headers = {'X-Auth': os.getenv('XBOX_API_ID')}
 #	result = requests.get(xboxURL + gt + '/presence', headers=headers)
