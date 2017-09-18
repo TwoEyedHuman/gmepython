@@ -47,7 +47,8 @@ def roll_dice(data):
 def getUserPresence(gt):
 	xboxURL = 'https://xboxapi.com/v2/'
 	headers = {'X-Auth': os.getenv('XBOX_API_ID')}
-	result = request.POST.get(xboxURL + gt + '/presence', headers=headers)
+	result = requests.get(xboxURL + gt + '/presence')
+	##result = request.POST.get(xboxURL + gt + '/presence', headers=headers)
 
 ##	res = self.request("https://xboxapi.com/v2/" + gt + "/presence".format(xuid))
 	return result()
