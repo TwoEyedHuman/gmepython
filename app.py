@@ -63,7 +63,12 @@ def whosOnline(data):
 		responseBody = requests.get('https://xboxapi.com/v2/' + gt + '/presence', headers=headers, verify=False)
 		responsePayload = responseBody.json['state']
 		if responsePayload == "Online":
-			retStr = retStr + gt + ' is online.\n'
+			responseSystem = responseBody.json['devices'][0]['type']
+			if responseBody.json['devices'][0]['titles'][0]['placement'] == 'Full']:
+				responseGame = responseBody.json['devices'][0]['titles'][0]['name']
+			else:
+				responseGame = responseBody.json['devices'][0]['titles'][1]['name']
+			retStr = retStr + gt + ' is playing ' + responseGame + '.' + '.\n'
 	if len(retStr) <= 1:
 		send_message("Nobody is online")
 	else:
