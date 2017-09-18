@@ -12,7 +12,7 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
-friends_gt = ['DatSW33SH', 'Two Eyed Human']#['cosmicphantasma', 'DatSW33SH', 'FlyNikesAllDay', 'Spectra SIGNS', 'Two Eyed Human', 'Unsung Samurai']
+friends_gt = ['cosmicphantasma', 'DatSW33SH', 'FlyNikesAllDay', 'Spectra SIGNS', 'Two Eyed Human', 'Unsung Samurai']
 
 @app.route('/', methods=['POST'])
 def webhook():
@@ -68,7 +68,7 @@ def whosOnline(data):
 				responseGame = responseBody.json['devices'][0]['titles'][0]['name']
 			else:
 				responseGame = responseBody.json['devices'][0]['titles'][1]['name']
-			retStr = retStr + gt + ' is playing ' + responseGame + '.' + '.\n'
+			retStr = retStr + gt + ' is playing ' + responseGame + '.' + '\n'
 	if len(retStr) <= 1:
 		send_message("Nobody is online")
 	else:
