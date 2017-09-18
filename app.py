@@ -66,9 +66,9 @@ def getUserPresence(gt):
 def whosOnline(data):
 	retStr = ""
 #	for gt in friends_gt:
-	gt_res = getUserPresence(gt)
+	gt_res = getUserPresence('Unsung Samurai')
 	if gt_res['state'] == "Online":
-		retStr = retStr + "\n" + gt
+		retStr = retStr + "\n" + "Unsing Samurai"
 #	if len(retStr) <= 1:
 #		send_message("Nobody is online")
 #	else:
