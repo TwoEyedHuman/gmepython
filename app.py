@@ -12,7 +12,7 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
-friends_gt = ['cosmicphantasma']#, 'DatSW33SH', 'Fly Nikes All Day', 'Spectra SIGNS', 'Two Eyed Human', 'Unsung Samurai']
+friends_gt = ['cosmicphantasma', 'DatSW33SH', 'Fly Nikes All Day', 'Spectra SIGNS', 'Two Eyed Human', 'Unsung Samurai']
 
 @app.route('/', methods=['POST'])
 def webhook():
