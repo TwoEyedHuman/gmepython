@@ -12,7 +12,7 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
-friends_gt = ['cosmicphantasma', 'DatSW33SH', 'FlyNikesAllDay', 'Spectra SIGNS', 'Two Eyed Human', 'Unsung Samurai']
+friends_gt = ['DatSW33SH', 'Two Eyed Human']#['cosmicphantasma', 'DatSW33SH', 'FlyNikesAllDay', 'Spectra SIGNS', 'Two Eyed Human', 'Unsung Samurai']
 
 @app.route('/', methods=['POST'])
 def webhook():
@@ -63,7 +63,7 @@ def whosOnline(data):
 		responseBody = requests.get('https://xboxapi.com/v2/' + gt + '/presence', headers=headers, verify=False)
 		responsePayload = responseBody.json['state']
 		if responsePayload == "Online":
-			retStr = retStr + gt + ' is online. '
+			retStr = retStr + gt + ' is online.\n'
 	if len(retStr) <= 1:
 		send_message("Nobody is online")
 	else:
