@@ -45,11 +45,14 @@ def roll_dice(data):
 	send_message("Your die landed on " + str(result_dice))
 
 def getUserPresence(gt):
-	res = self.request("https://xboxapi.com/v2/" + gt + "/presence".format(xuid))
-	return res.json()
+	xboxURL = 'https://xboxapi.com/v2/'
+	headers = {'X-Auth': os.getenv('XBOX_API_ID')}
+	result = Request(xboxURL + gt + '/presence', headers=headers)
+
+##	res = self.request("https://xboxapi.com/v2/" + gt + "/presence".format(xuid))
+	return result.json()
 
 def whosOnline(data):
-	xboxURL = 'https://xboxapi.com/v2/'
 	retStr = ""
 	for gt in friends_gt:
 		if getUserPresence(gt)['state'] == "Online":
