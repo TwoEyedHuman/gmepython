@@ -11,6 +11,8 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
+friends_gt = ['cosmicphantasma', 'DatSW33SH', 'Fly Nikes All Day', 'Spectra SIGNS', 'Two Eyed Human', 'Unsung Samurai']
+
 @app.route('/', methods=['POST'])
 def webhook():
 	data = request.get_json()
@@ -18,6 +20,8 @@ def webhook():
 
 	if 'roll' in data['text'].lower() and 'die' in data['text'].lower():
 		roll_dice(data)
+	elif 'whos online' in data['text']:
+		whosOnline(data)
 
 	return "ok", 200
 
@@ -39,3 +43,18 @@ def roll_dice(data):
 	numbers = [int(s) for s in data['text'].split() if s.isdigit()]
 	result_dice = randint(1,numbers[0])
 	send_message("Your die landed on " + str(result_dice))
+
+def getUserPresence(gt):
+	res = self.request("https://xboxapi.com/v2/" + gt + "/presence".format(xuid))
+	return res.json()
+
+def whosOnline(data):
+	xboxURL = 'https://xboxapi.com/v2/'
+	retStr = ""
+	for gt in friends_gt:
+		if getUserPresence(gt)['state'] == "Online":
+			retStr = retStr + "\n" + gt
+	if len(retStr) <= 1:
+		send_message("Nobody is online")
+	else:
+		send_message(retStr)
