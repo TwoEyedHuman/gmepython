@@ -52,7 +52,7 @@ def getUserPresence(gt):
     	'X-AUTH': os.getenv('XBOX_API_ID'),
 	}
 	
-	responseBody = requests.get('https://xboxapi.com/v2/Unsung Samurai/presence', headers=headers, verify=False)
+	responseBody = requests.get('https://xboxapi.com/v2/Two Eyed Human/presence', headers=headers, verify=False)
 
 	responsePL = responseBody.json['state']
 
@@ -72,4 +72,4 @@ def whosOnline(data):
 #	if len(retStr) <= 1:
 #		send_message("Nobody is online")
 #	else:
-	send_message(retStr)
+	send_message('Good')
