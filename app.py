@@ -50,7 +50,7 @@ def getUserPresence(gt):
 	result = Request(xboxURL + gt + '/presence', headers=headers)
 
 ##	res = self.request("https://xboxapi.com/v2/" + gt + "/presence".format(xuid))
-	return result.json()
+	return result()
 
 def whosOnline(data):
 	retStr = ""
