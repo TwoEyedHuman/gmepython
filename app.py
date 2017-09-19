@@ -67,7 +67,7 @@ def whosOnline(data):
 			tmpStr = gt + ' is online.\n'
 			for titles in responseBody.json['devices'][0]['titles']:
 				if titles['placement'] == "Full" and titles['name'] != "Home":
-					tmpStr = gt + ' is playing ' + titles['name']
+					tmpStr = gt + ' is playing ' + titles['name'] + '\n'
 			responseGame = responseBody.json['devices'][0]['titles'][0]['name']
 			retStr = retStr + tmpStr
 	if len(retStr) <= 1:
