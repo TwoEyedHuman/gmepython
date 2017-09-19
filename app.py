@@ -64,8 +64,12 @@ def whosOnline(data):
 		responsePayload = responseBody.json['state']
 		if responsePayload == "Online":
 			responseSystem = responseBody.json['devices'][0]['type']
+			tmpStr = gt + ' is online.\n'
+			for titles in responseBody.json['devices'][0]['titles']:
+				if titles['placement'] == "Full" and titles['name'] != "Home":
+					tmpStr = gt + ' is playing ' + titles['name']
 			responseGame = responseBody.json['devices'][0]['titles'][0]['name']
-			retStr = retStr + gt + ' is playing ' + responseGame + '.' + '\n'
+			retStr = retStr + tmpStr
 	if len(retStr) <= 1:
 		send_message("Nobody is online")
 	else:
