@@ -45,14 +45,6 @@ def roll_dice(data):
 	result_dice = randint(1,numbers[0])
 	send_message("Your die landed on " + str(result_dice))
 
-#def getUserPresence(gt):
-#	headers = {'X-Auth': os.getenv('XBOX_API_ID')}
-#	result = requests.get(xboxURL + gt + '/presence', headers=headers)
-	##result = request.POST.get(xboxURL + gt + '/presence', headers=headers)
-
-##	res = self.request("https://xboxapi.com/v2/" + gt + "/presence".format(xuid))
-#	return responsePL
-
 def whosOnline(data):
 	xboxURL = 'https://xboxapi.com/v2/'
 	headers = {
