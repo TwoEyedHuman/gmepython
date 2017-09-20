@@ -50,9 +50,8 @@ def whosOnline(data):
 	headers = {
     	'X-AUTH': os.getenv('XBOX_API_ID'),
 	}
-	accessCheckBody = requests.get('https://xboxapi.com/v2/Major Nelson/presence', headers=headers, verify=False)
 	returnString = ""
-	if 'status' in accessCheckBody.json():
+	try:
 		for gt in friendsGamertags:
 			responseBody = requests.get('https://xboxapi.com/v2/' + gt + '/presence', headers=headers, verify=False)
 			if responseBody.json['state'] == "Online":
@@ -64,6 +63,6 @@ def whosOnline(data):
 				returnString = returnString + specificGamer
 		if len(returnString) <= 1:
 			returnString = "Nobody is online."
-	else:
-		returnString = "Deckard Cain has been killed by butterflies."
-	send_message(returnString)
+		send_message(returnString)
+	except:
+		send_message("Deckard Cain has been killed by butterflies.")
