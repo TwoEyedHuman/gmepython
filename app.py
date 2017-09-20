@@ -53,7 +53,8 @@ def whosOnline(data):
 	retStr = ""
 	for gt in friends_gt:
 		responseBody = requests.get('https://xboxapi.com/v2/' + gt + '/presence', headers=headers, verify=False)
-		if 'state' in responseBody:
+		data = json.loads(responseBody)
+		if 'state' in data:
 			responsePayload = responseBody.json['state']
 		else:
 			responsePayload == "Offline"
