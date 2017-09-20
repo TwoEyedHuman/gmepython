@@ -12,7 +12,7 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
-friends_gt = ['cosmicphantasma', 'DatSW33SH', 'FlyNikesAllDay', 'Spectra SIGNS', 'Two Eyed Human', 'Unsung Samurai']
+friendsGamertags = ['cosmicphantasma', 'DatSW33SH', 'FlyNikesAllDay', 'Spectra SIGNS', 'Two Eyed Human', 'Unsung Samurai']
 
 @app.route('/', methods=['POST'])
 def webhook():
@@ -50,19 +50,20 @@ def whosOnline(data):
 	headers = {
     	'X-AUTH': os.getenv('XBOX_API_ID'),
 	}
-	retStr = ""
-	for gt in friends_gt:
-		responseBody = requests.get('https://xboxapi.com/v2/' + gt + '/presence', headers=headers, verify=False)
-		responsePayload = responseBody.json['state']
-		if responsePayload == "Online":
-			responseSystem = responseBody.json['devices'][0]['type']
-			tmpStr = gt + ' is online.\n'
-			for titles in responseBody.json['devices'][0]['titles']:
-				if titles['placement'] == "Full" and titles['name'] != "Home":
-					tmpStr = gt + ' is playing ' + titles['name'] + '\n'
-			responseGame = responseBody.json['devices'][0]['titles'][0]['name']
-			retStr = retStr + tmpStr
-	if len(retStr) <= 1:
-		send_message("Nobody is online")
+	accessCheckBody = requests.get('https://xboxapi.com/v2/Major Nelson/presence', headers=headers, verify=False)
+	returnString = ""
+	if 'status' in accessCheckBody.json():
+		for gt in friendsGamertags:
+			responseBody = requests.get('https://xboxapi.com/v2/' + gt + '/presence', headers=headers, verify=False)
+			if responseBody.json['state'] == "Online":
+				responseSystem = responseBody.json['devices'][0]['type']
+				specificGamer = gt + ' is online.\n'
+				for titles in responseBody.json['devices'][0]['titles']:
+					if titles['placement'] == "Full" and titles['name'] != "Home":
+						specificGamer = gt + ' is playing ' + titles['name'] + '\n'
+				returnString = returnString + specificGamer
+		if len(returnString) <= 1:
+			returnString = "Nobody is online."
 	else:
-		send_message(retStr)
+		returnString = "Deckard Cain has been killed by butterflies."
+	send_message(returnString)
