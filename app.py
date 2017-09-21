@@ -12,6 +12,8 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
+commonWords = ['a', 'is', 'the']
+
 friendsGamertags = ['cosmicphantasma', 'DatSW33SH', 'FlyNikesAllDay', 'Spectra SIGNS', 'Two Eyed Human', 'Unsung Samurai']
 
 @app.route('/', methods=['POST'])
@@ -23,6 +25,8 @@ def webhook():
 		roll_dice(data)
 	elif 'whos online' in data['text'].lower() or 'who\'s online' in data['text'].lower():
 		whosOnline(data)
+	elif '@Deckard Cain' in data['text'] and ('what is ' in data['text'].lower() or 'define' in data['text']:
+		definitionUD(data)
 
 	return "ok", 200
 
@@ -66,3 +70,7 @@ def whosOnline(data):
 		send_message(returnString)
 	except:
 		send_message("Deckard Cain has been killed by butterflies.")
+		
+def definitionUD(data):
+	udURL = 'http://api.urbandictionary.com/v0/'
+	
