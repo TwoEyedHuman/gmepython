@@ -73,4 +73,11 @@ def whosOnline(data):
 		
 def definitionUD(data):
 	udURL = 'http://api.urbandictionary.com/v0/'
+	if len([x for x in data['text'] if x not in commonWords]) >= 1:
+		send_message("Zod Amn Ith...how do you not know what that means?")
+	else:
+		lookupWord = [x for x in data['text'] if x not in commonWords][0]
+	responseBody = requests.get(udURL + 'define?term=' + lookupWord)
+	wordDefinition = respondeBody.json['list'][0]['definition']
+	sendMessage(wordDefinition)
 	
