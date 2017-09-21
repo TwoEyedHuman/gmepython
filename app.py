@@ -25,7 +25,7 @@ def webhook():
 		roll_dice(data)
 	elif 'whos online' in data['text'].lower() or 'who\'s online' in data['text'].lower():
 		whosOnline(data)
-	elif '@Deckard Cain' in data['text'] and ('what is ' in data['text'].lower() or 'define' in data['text']:
+	elif '@Deckard Cain' in data['text'] and ('what is ' in data['text'].lower() or 'define' in data['text'] or 'definition' in data['text']):
 		definitionUD(data)
 
 	return "ok", 200
@@ -76,7 +76,7 @@ def definitionUD(data):
 	if len([x for x in data['text'] if x not in commonWords]) >= 1:
 		send_message("Zod Amn Ith...how do you not know what that means?")
 	else:
-		lookupWord = [x for x in data['text'] if x not in commonWords][0]
+		lookupWord = [x for x in data['text'] if x not in set().union(commonWords,['what','is','definition','define'])][0]
 	responseBody = requests.get(udURL + 'define?term=' + lookupWord)
 	wordDefinition = respondeBody.json['list'][0]['definition']
 	sendMessage(wordDefinition)
