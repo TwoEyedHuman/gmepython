@@ -68,6 +68,8 @@ def whosOnline(data):
 		if len(returnString) <= 1:
 			returnString = "Nobody is online."
 		send_message(returnString)
+	except KeyError:
+		send_message("The Keys of Hate, Terror, and Destruction are required to create the Infernal Machine.")
 	except:
 		send_message("Deckard Cain has been killed by butterflies.")
 		
@@ -79,5 +81,5 @@ def definitionUD(data):
 		lookupWord = [x for x in data['text'] if x not in set().union(commonWords,['what','is','definition','define'])][0]
 	responseBody = requests.get(udURL + 'define?term=' + lookupWord)
 	wordDefinition = respondeBody.json['list'][0]['definition']
-	sendMessage(wordDefinition)
+	send_message(wordDefinition)
 	
