@@ -79,8 +79,11 @@ def definitionUD(data):
 	udURL = 'http://api.urbandictionary.com/v0/'
 	if len([x for x in data['text'] if x not in commonWords]) >= 1:
 		lookupWord = [x for x in data['text'].split() if x not in set().union(commonWords,['what','is','definition','define','@','Deckard','@Deckard','Cain'],botName.split())][0]
-		responseBody = requests.get(udURL + 'define?term=' + lookupWord)
-		wordDefinition = responseBody.json['list'][0]['definition']
+		try:
+			responseBody = requests.get(udURL + 'define?term=' + lookupWord)
+			wordDefinition = responseBody.json['list'][0]['definition']
+		except:
+			wordDefinition = "I cannot identify that."
 		send_message(wordDefinition)
 	else:
 		send_message("Zod Amn Ith...how do you not know what that means?")
