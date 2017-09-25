@@ -78,7 +78,7 @@ def whosOnline(data):
 def definitionUD(data):
 	udURL = 'http://api.urbandictionary.com/v0/'
 	if len([x for x in data['text'] if x not in commonWords]) >= 1:
-		lookupWord = [x for x in data['text'].split() if x not in set().union(commonWords,['what','is','definition','define','@','Deckard','@Deckard','Cain'],botName.split())][0]
+		lookupWord = [x for x in data['text'].split() if x not in set().union(commonWords,['what','is','definition','define','@','Deckard','@Deckard','Cain','deckard','cain','dc','DC'],botName.split())][0]
 		try:
 			responseBody = requests.get(udURL + 'define?term=' + lookupWord)
 			wordDefinition = responseBody.json['list'][0]['definition']
