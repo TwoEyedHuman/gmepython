@@ -27,7 +27,7 @@ def webhook():
 		roll_dice(data)
 	elif 'whos online' in data['text'].lower() or 'who\'s online' in data['text'].lower():
 		whosOnline(data)
-	elif (@dc in data['text'].lower() or '@deckard cain' in data['text'].lower()) and ('what is ' in data['text'].lower() or 'define' in data['text'] or 'definition' in data['text']):
+	elif ('@dc' in data['text'].lower() or '@deckard cain' in data['text'].lower()) and ('what is ' in data['text'].lower() or 'define' in data['text'] or 'definition' in data['text']):
 		definitionUD(data)
 
 	return "ok", 200
