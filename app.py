@@ -23,7 +23,7 @@ def webhook():
 	data = request.get_json()
 	log('Recieved {}'.format(data))
 
-	if 'roll' in data['text'].lower() and 'die' in data['text'].lower():
+	if ('roll' in data['text'].lower() and 'die' in data['text'].lower()) or ('roll D' in data['text'].lower()):
 		roll_dice(data)
 	elif 'who' in data['text'].lower and 'online' in data['text'].lower():
 		whosOnline(data)
@@ -47,7 +47,7 @@ def log(msg):
 	sys.stdout.flush()
 
 def roll_dice(data):
-	numbers = [int(s) for s in data['text'].split() if s.isdigit()]
+	numbers = [int(s.replace("D", "") for s in data['text'].split() if s.isdigit()]
 	result_dice = randint(1,numbers[0])
 	send_message("Your die landed on " + str(result_dice))
 
