@@ -47,7 +47,7 @@ def log(msg):
 	sys.stdout.flush()
 
 def roll_dice(data):
-	numbers = [int(s.replace("D", "") for s in data['text'].split() if s.isdigit()]
+	numbers = [int(s.replace("D", "")) for s in data['text'].split() if s.replace("D", "").isdigit()]
 	result_dice = randint(1,numbers[0])
 	send_message("Your die landed on " + str(result_dice))
 
