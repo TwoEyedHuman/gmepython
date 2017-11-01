@@ -23,7 +23,7 @@ def webhook():
 	data = request.get_json()
 	log('Recieved {}'.format(data))
 
-	if ('roll' in data['text'].lower() and 'die' in data['text'].lower()) or ('roll D' in data['text'].lower()):
+	if ('roll' in data['text'].lower() and 'die' in data['text'].lower()) or ('roll d' in data['text'].lower()):
 		roll_dice(data)
 	elif 'who' in data['text'].lower and 'online' in data['text'].lower():
 		whosOnline(data)
