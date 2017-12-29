@@ -14,8 +14,7 @@ app = Flask(__name__)
 
 commonWords = ['a','about','all','also','and','as','at','be','because','but','by','can','come','could','day','do','even','find','first','for','from','get','give','go','have','he','her','here','him','his','how','I','if','in','into','it','its','just','know','like','look','make','man','many','me','more','my','new','no','not','now','of','on','one','only','or','other','our','out','people','say','see','she','so','some','take','tell','than','that','the','their','them','then','there','these','they','thing','think','this','those','time','to','two','up','use','very','want','way','we','well','what','when','which','who','will','with','would','year','you','your']
 
-#friendsGamertags = ['cosmicphantasma', 'DatSW33SH', 'FlyNikesAllDay', 'Spectra SIGNS', 'Two Eyed Human', 'Unsung Samurai']
-friendsGamertags = ['Two Eyed Human']
+friendsGamertags = ['cosmicphantasma', 'DatSW33SH', 'FlyNikesAllDay', 'Spectra SIGNS', 'Two Eyed Human', 'Unsung Samurai']
 
 botName = "Deckard Cain"
 
@@ -68,12 +67,11 @@ def whosOnline(data):
 					if titles['placement'] == "Full" and titles['name'] != "Home":
 						specificGamer = gt + ' is playing ' + titles['name']
 				mixerURL = 'https://mixer.com/api/v1/'
-#				mixerResponseBody = requests.get(mixerURL + 'channels/' + gt.replace(" ", "_"), verify=False)
-				mixerResponseBody = requests.get('https://mixer.com/api/v1/channels/Two_Eyed_Human')
+				mixerResponseBody = requests.get(mixerURL + 'channels/' + gt.replace(" ","_"))
 				print(mixerResponseBody.json())
 				if mixerResponseBody.json()['online']:
-					specificGamer = specificGamer + ' (streaming)\n'
-				returnString = returnString + specificGamer + '\n'
+					specificGamer = specificGamer + ' (streaming)'
+				returnString = returnString + specificGamer + '.\n'
 		if len(returnString) <= 1:
 			returnString = "Nobody is online."
 		send_message(returnString)
