@@ -70,6 +70,7 @@ def whosOnline(data):
 				mixerURL = 'https://mixer.com/api/v1/'
 #				mixerResponseBody = requests.get(mixerURL + 'channels/' + gt.replace(" ", "_"), verify=False)
 				mixerResponseBody = requests.get('https://mixer.com/api/v1/channels/Two_Eyed_Human')
+				print(mixerResponseBody.json())
 				if mixerResponseBody.json()['online']:
 					specificGamer = specificGamer + ' (streaming)\n'
 				returnString = returnString + specificGamer + '\n'
