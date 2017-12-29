@@ -68,7 +68,7 @@ def whosOnline(data):
 					if titles['placement'] == "Full" and titles['name'] != "Home":
 						specificGamer = gt + ' is playing ' + titles['name']
 				mixerURL = 'https://mixer.com/api/v1/'
-				mixerResponseBody = requests.get(mixerURL + 'channels/' + gt.replace(" ", "_"))
+				mixerResponseBody = requests.get(mixerURL + 'channels/' + gt.replace(" ", "_"), verify=False)
 				if mixerResponseBody.json['online']:
 					specificGamer = specificGamer + ' (streaming)\n'
 				returnString = returnString + specificGamer + '\n'
