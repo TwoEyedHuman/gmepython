@@ -14,9 +14,8 @@ app = Flask(__name__)
 
 commonWords = ['a','about','all','also','and','as','at','be','because','but','by','can','come','could','day','do','even','find','first','for','from','get','give','go','have','he','her','here','him','his','how','I','if','in','into','it','its','just','know','like','look','make','man','many','me','more','my','new','no','not','now','of','on','one','only','or','other','our','out','people','say','see','she','so','some','take','tell','than','that','the','their','them','then','there','these','they','thing','think','this','those','time','to','two','up','use','very','want','way','we','well','what','when','which','who','will','with','would','year','you','your']
 
-friendsGamertags = ['cosmicphantasma', 'DatSW33SH', 'FlyNikesAllDay', 'Spectra SIGNS', 'Two Eyed Human', 'Unsung Samurai']
-
-friendsMixers = ['cosmicphantasma', 'DatSW33SH', 'FlyNikesAllDay', 'Spectra_SIGNS', 'Two_Eyed_Human', 'Unsung_Samurai']
+#friendsGamertags = ['cosmicphantasma', 'DatSW33SH', 'FlyNikesAllDay', 'Spectra SIGNS', 'Two Eyed Human', 'Unsung Samurai']
+friendsGamertags = ['Two Eyed Human']
 
 botName = "Deckard Cain"
 
@@ -64,16 +63,15 @@ def whosOnline(data):
 			responseBody = requests.get('https://xboxapi.com/v2/' + gt + '/presence', headers=headers, verify=False)
 			if responseBody.json['state'] == "Online":
 				responseSystem = responseBody.json['devices'][0]['type']
-				specificGamer = gt + ' is online.\n'
+				specificGamer = gt + ' is online'
 				for titles in responseBody.json['devices'][0]['titles']:
 					if titles['placement'] == "Full" and titles['name'] != "Home":
-						specificGamer = gt + ' is playing ' + titles['name'] + '\n'
-				returnString = returnString + specificGamer
+						specificGamer = gt + ' is playing ' + titles['name']
 				mixerURL = 'https://mixer.com/api/v1/'
 				mixerResponseBody = requests.get(mixerURL + 'channels/' + gt.replace(" ", "_"))
 				if mixerResponseBody.json['online']:
-					returnString = returnString + ' (streaming)'
-
+					specificGamer = specificGamer + ' (streaming)\n'
+				returnString = returnString + specificGamer + '\n'
 		if len(returnString) <= 1:
 			returnString = "Nobody is online."
 		send_message(returnString)
@@ -81,6 +79,7 @@ def whosOnline(data):
 		send_message("The Keys of Hate, Terror, and Destruction are required to create the Infernal Machine.")
 	except:
 		send_message("Deckard Cain has been killed by butterflies.")
+		
 		
 def definitionUD(data):
 	udURL = 'http://api.urbandictionary.com/v0/'
