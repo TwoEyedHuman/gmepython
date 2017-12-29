@@ -61,10 +61,10 @@ def whosOnline(data):
 	try:
 		for gt in friendsGamertags:
 			responseBody = requests.get('https://xboxapi.com/v2/' + gt + '/presence', headers=headers, verify=False)
-			if responseBody.json['state'] == "Online":
-				responseSystem = responseBody.json['devices'][0]['type']
+			if responseBody.json().['state'] == "Online":
+				responseSystem = responseBody.json().['devices'][0]['type']
 				specificGamer = gt + ' is online'
-				for titles in responseBody.json['devices'][0]['titles']:
+				for titles in responseBody.json().['devices'][0]['titles']:
 					if titles['placement'] == "Full" and titles['name'] != "Home":
 						specificGamer = gt + ' is playing ' + titles['name']
 				mixerURL = 'https://mixer.com/api/v1/'
