@@ -16,6 +16,8 @@ commonWords = ['a','about','all','also','and','as','at','be','because','but','by
 
 friendsGamertags = ['cosmicphantasma', 'DatSW33SH', 'FlyNikesAllDay', 'Spectra SIGNS', 'Two Eyed Human', 'Unsung Samurai']
 
+friendsMixers = ['cosmicphantasma', 'DatSW33SH', 'FlyNikesAllDay', 'Spectra_SIGNS', 'Two_Eyed_Human', 'Unsung_Samurai']
+
 botName = "Deckard Cain"
 
 @app.route('/', methods=['POST'])
@@ -23,11 +25,11 @@ def webhook():
 	data = request.get_json()
 	log('Recieved {}'.format(data))
 
-	if ('roll' in data['text'].lower() and 'die' in data['text'].lower()) or ('roll d' in data['text'].lower()):
+	if 'roll' in data['text'].lower() and 'die' in data['text'].lower():
 		roll_dice(data)
-	elif ('who' in data['text'].lower()) and ('online' in data['text'].lower()):
+	elif 'whos online' in data['text'].lower() or 'who\'s online' in data['text'].lower():
 		whosOnline(data)
-	elif ('@dc' in data['text'].lower() or '@deckard cain' in data['text'].lower()) and ('what is ' in data['text'].lower() or 'define' in data['text'] or 'definition' in data['text']):
+	elif '@Deckard Cain' in data['text'] and ('what is ' in data['text'].lower() or 'define' in data['text'] or 'definition' in data['text']):
 		definitionUD(data)
 
 	return "ok", 200
@@ -47,7 +49,7 @@ def log(msg):
 	sys.stdout.flush()
 
 def roll_dice(data):
-	numbers = [int(s) for s in data['text'].lower().replace("d","").split() if s.isdigit()]
+	numbers = [int(s) for s in data['text'].split() if s.isdigit()]
 	result_dice = randint(1,numbers[0])
 	send_message("Your die landed on " + str(result_dice))
 
@@ -67,6 +69,11 @@ def whosOnline(data):
 					if titles['placement'] == "Full" and titles['name'] != "Home":
 						specificGamer = gt + ' is playing ' + titles['name'] + '\n'
 				returnString = returnString + specificGamer
+				mixerURL = 'https://mixer.com/api/v1/'
+				mixerResponseBody = requests.get(mixerURL + 'channels/' + gt.replace(" ", "_"))
+				if mixerResponseBody.json['online']:
+					returnString = returnString + ' (streaming)'
+
 		if len(returnString) <= 1:
 			returnString = "Nobody is online."
 		send_message(returnString)
@@ -78,7 +85,7 @@ def whosOnline(data):
 def definitionUD(data):
 	udURL = 'http://api.urbandictionary.com/v0/'
 	if len([x for x in data['text'] if x not in commonWords]) >= 1:
-		lookupWord = [x for x in data['text'].split() if x not in set().union(commonWords,['what','is','definition','define','@','Deckard','@Deckard','Cain','deckard','cain','dc','DC','@dc','@DC'],botName.split())][0]
+		lookupWord = [x for x in data['text'].split() if x not in set().union(commonWords,['what','is','definition','define','@','Deckard','@Deckard','Cain'],botName.split())][0]
 		try:
 			responseBody = requests.get(udURL + 'define?term=' + lookupWord)
 			wordDefinition = responseBody.json['list'][0]['definition']
