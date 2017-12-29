@@ -77,8 +77,8 @@ def whosOnline(data):
 		send_message(returnString)
 	except KeyError:
 		send_message("The Keys of Hate, Terror, and Destruction are required to create the Infernal Machine.")
-#	except:
-#		send_message("Deckard Cain has been killed by butterflies.")
+	except:
+		send_message("Deckard Cain has been killed by butterflies.")
 		
 		
 def definitionUD(data):
